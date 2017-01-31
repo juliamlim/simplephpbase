@@ -23,6 +23,7 @@
                 $nameErr = "This is a required field.";
                 $form_succ = false;
             }
+		//could not get this preg_match to work
             if (!(preg_match("[A-Za-z- ]", $name))) {
                 $nameErr = "Name can not contain any numbers or symbols.";
                 $form_succ = false;
