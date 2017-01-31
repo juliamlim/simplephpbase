@@ -1,0 +1,142 @@
+@charset "UTF-8";
+/*
+
+Colors 
+
+Background: #F7F0DC
+Header: #B2CCB9 || #23ACB4
+Footer: #FFCA2D || #434444
+
+*/
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: #434444;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    background: #F7F0DC;
+}
+
+header {
+    padding: 30px;
+    text-align: center;
+    background: #23ACB4;
+}
+header h1,
+header h2 {
+    color: #F7F0DC;
+}
+#home-header h1 {
+    margin: 40px 0;
+}
+#alt-header {
+    padding: 20px;
+}
+footer {
+    padding: 15px;
+    color: #fff;
+    text-align: center;
+    background: #434444;
+}
+header a {
+    color: #434444;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+footer a {
+    color: #23ACB4;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+header a:hover,
+footer a:hover,
+header a:focus,
+footer a:focus {
+    color: #FFCA2D;
+}
+header ul,
+footer ul {
+    padding: 0;
+}
+
+header ul li,
+footer ul li {
+    display: inline-block;
+    padding: 10px;
+    margin: 5px 20px;
+    list-style: none;
+}
+footer {
+    color: #2F3030;
+}
+main {
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+}
+form {
+    width: 80%;
+    min-width: 320px;
+    max-width: 480px;
+    margin: 0 auto;
+}
+form * {
+    margin: 0 0 20px;
+}
+form label {
+    font-size: 12px;
+}
+input[type=text],
+textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 9px 12px;
+    font: 15px "Trebuchet MS", Helvetica, sans-serif;
+    background: none;
+    border: 2px solid #23ACB4;
+}
+select {
+    -webkit-appearance: none;
+    width: 100%;
+    padding: 9px 14px;
+    color: #23ACB4;
+    font-size: 14px;
+    background: url(../media/drop-list.svg) no-repeat 97% 55%/11px;
+    border: 2px solid #23ACB4;
+    border-radius: 0;
+}
+select option {
+    -webkit-appearance: none;
+    margin: none;
+    padding: none;
+}
+input[type=submit]{
+    display: block;
+    padding: 9px 14px;
+    margin: 0 auto;
+    color: #23ACB4;
+    font: bold 14px "Trebuchet MS", Helvetica, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: none;
+    border: 2px solid #23ACB4;
+    cursor: pointer;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+input[type=submit]:hover,
+input[type=submit]:focus {
+    color: #FFCA2D;
+    border-color: #FFCA2D;
+}
+.important {
+    color: indianred;
+}
+.error {
+    margin-bottom: 10px;
+    color: indianred;
+    font-size: 12px;
+}
+
