@@ -5,8 +5,7 @@
 
     if (($_SERVER['REQUEST_METHOD'] == 'POST') && !empty($_POST['send'])) {
         
-        $name = $email = $subject = $message = $priority = $nameErr = $mailErr = $msgErr = $priErr ;
-        $action = "thanks.php";
+        $name = $email = $subject = $message = $priority = $nameErr = $mailErr = $msgErr = $priErr = $action = "";
         
         function form_validation(){
             
@@ -20,43 +19,36 @@
             
             $form_succ = true;
             
-            if (preg_match('/[a-zA-Z -]+/g', $name)) {
+            if (preg_match("/[0-9_+.,!@#$%^&*();\\/|<>\"\']/", $name)) {
                 $nameErr = "Name can not contain any numbers or symbols.";
                 $form_succ = false;
-                $action = "";
             }
             if ($name == "") {
                 $nameErr = "This is a required field.";
                 $form_succ = false;
-                $action = "";
             }
 
             if (!filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL)) {
                 $mailErr = "Enter a valid e-mail.";
                 $form_succ = false;
-                $action = "";
             }
             if ($email == "") {
                 $mailErr = "This is a required field.";
                 $form_succ = false;
-                $action = "";
             }
             
-            if (preg_match('(fuck|shit|dick)', $message)) {
+            if (preg_match('/(fuck|shit|dick)/', $message)) {
                 $msgErr = "Your profanity is not appreciated.";
                 $form_succ = false;
-                $action = "";
             }
             if ($message == "") {
                 $msgErr = "This is a required field.";
                 $form_succ = false;
-                $action = "";
             }
             
             if (empty($priority)) {
                 $priErr = "Please select an option.";
                 $form_succ = false;
-                $action = "";
             }
             
             return $form_succ;
@@ -65,7 +57,7 @@
         
         
         if(isset($_POST['send']) && form_validation()) {
-            $action = "thanks.php";
+            header("Location: thanks.php");
         }
     }
 
