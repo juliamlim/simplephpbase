@@ -5,9 +5,10 @@
 
     if (($_SERVER['REQUEST_METHOD'] == 'POST') && !empty($_POST['send'])) {
         
-        $name = $email = $subject = $message = $priority = $nameErr = $mailErr = $msgErr = $priErr = "";
+        $name = $email = $subject = $message = $priority = $nameErr = $mailErr = $msgErr = $priErr ;
+        $action = "thanks.php";
         
-        function form_validation($form_value){
+        function form_validation(){
             
             global $name, $email, $subject, $message, $priority, $nameErr, $mailErr, $msgErr, $priErr;
             
@@ -19,47 +20,55 @@
             
             $form_succ = true;
             
+            if (preg_match('/[a-zA-Z -]+/g', $name)) {
+                $nameErr = "Name can not contain any numbers or symbols.";
+                $form_succ = false;
+                $action = "";
+            }
             if ($name == "") {
                 $nameErr = "This is a required field.";
                 $form_succ = false;
-            }
-            if (!(preg_match("[A-Za-z- ]", $name))) {
-                $nameErr = "Name can not contain any numbers or symbols.";
-                $form_succ = false;
+                $action = "";
             }
             
-            if ($email == "") {
-                $mailErr = "This is a required field.";
-                $form_succ = false;
-            }
             if (!filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL)) {
                 $mailErr = "Enter a valid e-mail.";
                 $form_succ = false;
+                $action = "";
+            }
+            if ($email == "") {
+                $mailErr = "This is a required field.";
+                $form_succ = false;
+                $action = "";
             }
             
-            if ($message == "") {
-                $msgErr = "This is a required field.";
-                $form_succ = false;
-            }
             if (preg_match('(fuck|shit|dick)', $message)) {
                 $msgErr = "Your profanity is not appreciated.";
                 $form_succ = false;
+                $action = "";
+            }
+            if ($message == "") {
+                $msgErr = "This is a required field.";
+                $form_succ = false;
+                $action = "";
             }
             
             if (empty($priority)) {
                 $priErr = "Please select an option.";
                 $form_succ = false;
+                $action = "";
             }
             
             return $form_succ;
         }
         
+        
+        
         if(isset($_POST['send']) && form_validation()) {
-            header('Location: thanks.php');
+            $action = "thanks.php";
         }
     }
-?>
-<?php 
+
     $page_title = "Contact";
     $alt_css = ""; //write path if there are any alternate css files
 
@@ -71,7 +80,7 @@
     $page_header = "Say Hi"; // main header for the page
     
     ob_start();?>
-    <form id="contact_form" action="" method="post">
+    <form id="contact_form" action="<?php echo $action;?>" method="POST">
         <p><?php echo $err_msg;?></p>
         <label for="name">Name</label>
 		<input id="name" name="name" type="text" value="<?php if(isset($name)){ echo $name; }?>"/>
@@ -112,7 +121,7 @@
 <?php
     $contact_form = ob_get_contents();
     ob_end_clean();
-
+    
     $page_content[""] = $contact_form;
     include "includes/body.php";
     
