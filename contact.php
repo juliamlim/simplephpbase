@@ -30,7 +30,7 @@
                 $form_succ = false;
                 $action = "";
             }
-            
+
             if (!filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL)) {
                 $mailErr = "Enter a valid e-mail.";
                 $form_succ = false;
